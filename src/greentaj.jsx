@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, useScroll, useTransform, AnimatePresence } from 'framer-motion';
 
 // ==================== MAIN APP COMPONENT ====================
@@ -85,65 +85,98 @@ const GreenTajWebsite = () => {
 const Header = ({ scrolled, scrollToSection, mobileMenuOpen, setMobileMenuOpen }) => {
   const navItems = [
     { name: 'Home', id: 'home' },
-    { name: 'About', id: 'about' },
-    { name: 'Services', id: 'services' },
     { name: 'Projects', id: 'projects' },
-    { name: 'Contact', id: 'contact' }
+    { name: 'About', id: 'about' },
+    { name: 'Services', id: 'services' }
+  ];
+
+  const socialLinks = [
+    { name: 'Facebook', href: '#', icon: 'f', label: 'Facebook' },
+    { name: 'X', href: '#', icon: 'X', label: 'X (Twitter)' },
+    { name: 'Instagram', href: '#', icon: (
+      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    ), label: 'Instagram' }
   ];
 
   return (
-    <motion.header 
+    <motion.header
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-300 ${
-        scrolled ? 'bg-white shadow-lg py-4' : 'bg-transparent py-6'
-      }`}
+      className="fixed top-0 left-0 right-0 z-40 px-4 md:px-6 lg:px-8 pt-4"
     >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      {/* Dark green bar with rounded corners */}
+      <div className="max-w-7xl mx-auto bg-green-800 rounded-full shadow-lg py-3 px-6 md:px-8">
         <div className="flex justify-between items-center">
-          {/* Logo */}
-          <motion.div 
-            whileHover={{ scale: 1.05 }}
+          {/* Logo - pill shape */}
+          <motion.div
+            whileHover={{ scale: 1.02 }}
             className="flex items-center cursor-pointer"
             onClick={() => scrollToSection('home')}
           >
-            <div className="text-2xl md:text-3xl font-bold">
-              <span className={`${scrolled ? 'text-green-600' : 'text-white'}`}>GREEN</span>
-              <span className={`${scrolled ? 'text-gray-800' : 'text-white'}`}> TAJ</span>
+            <div className="px-5 py-2">
+              <span className="text-white font-bold text-lg md:text-xl tracking-tight">GREEN TAJ</span>
             </div>
           </motion.div>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center space-x-8">
-            {navItems.map((item) => (
-              <motion.button
-                key={item.id}
-                whileHover={{ scale: 1.1 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => scrollToSection(item.id)}
-                className={`text-sm font-medium transition-colors ${
-                  scrolled ? 'text-gray-700 hover:text-green-600' : 'text-white hover:text-green-400'
-                }`}
-              >
-                {item.name}
-              </motion.button>
-            ))}
+          {/* Desktop: Nav + Social + Contact */}
+          <div className="hidden lg:flex items-center gap-8 flex-1 justify-center">
+            <nav className="flex items-center gap-8">
+              {navItems.map((item) => (
+                <motion.button
+                  key={item.id}
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  onClick={() => scrollToSection(item.id)}
+                  className="text-white font-medium text-sm hover:text-green-200 transition-colors"
+                >
+                  {item.name}
+                </motion.button>
+              ))}
+            </nav>
+            <div className="flex items-center gap-5">
+              {socialLinks.map((link) => (
+                <motion.a
+                  key={link.name}
+                  href={link.href}
+                  aria-label={link.label}
+                  whileHover={{ scale: 1.15 }}
+                  whileTap={{ scale: 0.95 }}
+                  className="text-white hover:text-green-200 transition-colors"
+                >
+                  {typeof link.icon === 'string' ? (
+                    <span className="text-lg font-semibold">{link.icon}</span>
+                  ) : (
+                    link.icon
+                  )}
+                </motion.a>
+              ))}
+            </div>
+          </div>
+
+          {/* Contact us button */}
+          <div className="hidden lg:block">
             <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.03, boxShadow: '0 10px 25px rgba(0,0,0,0.2)' }}
+              whileTap={{ scale: 0.98 }}
               onClick={() => scrollToSection('contact')}
-              className="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition-colors"
+              className="bg-white text-green-800 font-semibold px-6 py-2.5 rounded-full flex items-center gap-2 shadow-md"
             >
-              Get Quote
+              <span>Contact us</span>
+              <span className="w-7 h-7 rounded-full bg-green-800 flex items-center justify-center">
+                <svg className="w-3.5 h-3.5 text-white" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5" viewBox="0 0 24 24" stroke="currentColor">
+                  <path d="M7 17L17 7M7 7h10v10" />
+                </svg>
+              </span>
             </motion.button>
-          </nav>
+          </div>
 
           {/* Mobile Menu Button */}
-          <button 
+          <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden text-white focus:outline-none"
+            className="lg:hidden text-white p-2 focus:outline-none"
+            aria-label="Toggle menu"
           >
-            <svg className={`w-6 h-6 ${scrolled ? 'text-gray-800' : 'text-white'}`} fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+            <svg className="w-6 h-6" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
               {mobileMenuOpen ? (
                 <path d="M6 18L18 6M6 6l12 12" />
               ) : (
@@ -160,23 +193,33 @@ const Header = ({ scrolled, scrollToSection, mobileMenuOpen, setMobileMenuOpen }
               initial={{ opacity: 0, height: 0 }}
               animate={{ opacity: 1, height: 'auto' }}
               exit={{ opacity: 0, height: 0 }}
-              className="md:hidden mt-4 pb-4"
+              className="lg:hidden mt-4 pt-4 border-t border-green-700"
             >
-              <div className="flex flex-col space-y-3">
+              <div className="flex flex-col space-y-4">
                 {navItems.map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className="text-left text-gray-700 hover:text-green-600 transition-colors py-2"
+                    className="text-left text-white hover:text-green-200 transition-colors py-2"
                   >
                     {item.name}
                   </button>
                 ))}
+                <div className="flex gap-4 py-2">
+                  {socialLinks.map((link) => (
+                    <a key={link.name} href={link.href} aria-label={link.label} className="text-white hover:text-green-200">
+                      {typeof link.icon === 'string' ? <span className="text-lg">{link.icon}</span> : link.icon}
+                    </a>
+                  ))}
+                </div>
                 <button
                   onClick={() => scrollToSection('contact')}
-                  className="bg-green-600 text-white px-6 py-2 rounded-full hover:bg-green-700 transition-colors text-center"
+                  className="bg-white text-green-800 font-semibold px-6 py-3 rounded-full text-center flex items-center justify-center gap-2 w-full"
                 >
-                  Get Quote
+                  Contact us
+                  <svg className="w-4 h-4" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
+                    <path d="M7 17L17 7M7 7h10v10" />
+                  </svg>
                 </button>
               </div>
             </motion.div>
@@ -187,103 +230,173 @@ const Header = ({ scrolled, scrollToSection, mobileMenuOpen, setMobileMenuOpen }
   );
 };
 
-// ==================== HERO SECTION ====================
+// ==================== HERO SECTION (from hero.jsx - with parallax) ====================
 const HeroSection = ({ scrollToSection }) => {
+  const heroRef = useRef(null);
+  const backgroundRef = useRef(null);
+  const contentRef = useRef(null);
+
+  const [animationValues, setAnimationValues] = useState({
+    currentTranslateY: 0,
+    currentScale: 1,
+    currentContentOpacity: 1,
+    currentContentTranslateY: 0,
+    targetTranslateY: 0,
+    targetScale: 1,
+    targetContentOpacity: 1,
+    targetContentTranslateY: 0
+  });
+
+  const lerp = (start, end, factor) => start + (end - start) * factor;
+
+  const calculateTargetValues = () => {
+    if (!heroRef.current) return;
+    const rect = heroRef.current.getBoundingClientRect();
+    const heroHeight = heroRef.current.offsetHeight;
+    let progress = 0;
+    if (rect.top <= 0) {
+      progress = Math.min(Math.abs(rect.top) / heroHeight, 1);
+    }
+    const maxTranslate = 200;
+    setAnimationValues(prev => ({
+      ...prev,
+      targetTranslateY: -(progress * maxTranslate),
+      targetScale: 1 + progress * 0.08,
+      targetContentOpacity: 1 - progress * 1.5,
+      targetContentTranslateY: progress * 50
+    }));
+  };
+
+  useEffect(() => {
+    let animationFrameId;
+    const animate = () => {
+      const smoothness = 0.08;
+      setAnimationValues(prev => {
+        const newValues = {
+          currentTranslateY: lerp(prev.currentTranslateY, prev.targetTranslateY, smoothness),
+          currentScale: lerp(prev.currentScale, prev.targetScale, smoothness),
+          currentContentOpacity: lerp(prev.currentContentOpacity, prev.targetContentOpacity, smoothness),
+          currentContentTranslateY: lerp(prev.currentContentTranslateY, prev.targetContentTranslateY, smoothness),
+          targetTranslateY: prev.targetTranslateY,
+          targetScale: prev.targetScale,
+          targetContentOpacity: prev.targetContentOpacity,
+          targetContentTranslateY: prev.targetContentTranslateY
+        };
+        if (backgroundRef.current) {
+          backgroundRef.current.style.transform = `translateY(${newValues.currentTranslateY}px) scale(${newValues.currentScale})`;
+        }
+        if (contentRef.current) {
+          contentRef.current.style.opacity = Math.max(0, newValues.currentContentOpacity);
+          contentRef.current.style.transform = `translateY(${newValues.currentContentTranslateY}px)`;
+        }
+        return newValues;
+      });
+      animationFrameId = requestAnimationFrame(animate);
+    };
+    animate();
+    return () => animationFrameId && cancelAnimationFrame(animationFrameId);
+  }, []);
+
+  useEffect(() => {
+    const handleScroll = () => calculateTargetValues();
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    calculateTargetValues();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
   return (
-    <section id="home" className="relative h-screen flex items-center justify-center overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <div 
-          className="absolute inset-0 bg-cover bg-center"
-          style={{
-            backgroundImage: 'url(https://images.unsplash.com/photo-1541888946425-d81bb19240f5?q=80&w=2070)',
-            filter: 'brightness(0.4)'
-          }}
-        />
-        <div className="absolute inset-0 bg-gradient-to-br from-green-900/60 to-gray-900/60" />
+    <section
+      ref={heroRef}
+      id="home"
+      className="relative w-full h-screen overflow-hidden flex items-center justify-center"
+    >
+      {/* Background with Parallax Effect */}
+      <div
+        ref={backgroundRef}
+        className="absolute -top-[15%] left-0 w-full h-[130%]"
+        style={{
+          willChange: 'transform',
+          backgroundImage: 'url(https://greentaj.com/wp-content/uploads/2026/01/GreenTaj1-scaled.jpg)',
+          backgroundSize: 'cover',
+          backgroundPosition: 'center'
+        }}
+      >
+        <div className="absolute inset-0" />
       </div>
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <motion.div
+      <div
+        ref={contentRef}
+        className="relative z-10 text-center px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto"
+        style={{ willChange: 'transform, opacity' }}
+      >
+        <motion.h1
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          transition={{ duration: 1, delay: 0.3 }}
+          className="text-[12vw] sm:text-[10vw] md:text-[9rem] lg:text-[12rem] xl:text-[14rem] font-bold text-white leading-none tracking-tighter mb-4"
+          style={{ letterSpacing: '-0.02em', lineHeight: '0.9' }}
         >
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-green-400 text-sm md:text-base font-semibold tracking-wider uppercase mb-4"
-          >
-            Welcome to Green Taj Trading & Contracting
-          </motion.p>
-          
-          <motion.h1 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.5 }}
-            className="text-4xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight"
-          >
-            Building Your Future with<br />
-            <span className="text-green-400">Precision & Expertise</span>
-          </motion.h1>
-          
-          <motion.p 
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.7 }}
-            className="text-lg md:text-xl text-gray-200 mb-8 max-w-3xl mx-auto"
-          >
-            One of Qatar's leading qualified organizations delivering excellence in Trading, General Contracting, MEP Works, and Carpentry since 2019
-          </motion.p>
-          
-          <motion.div 
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9 }}
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-          >
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToSection('contact')}
-              className="bg-green-600 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-700 transition-colors shadow-lg flex items-center gap-2"
-            >
-              Request a Quote
-              <svg className="w-5 h-5" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
-                <path d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </motion.button>
-            
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToSection('about')}
-              className="border-2 border-white text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-white hover:text-green-600 transition-all"
-            >
-              Learn More
-            </motion.button>
-          </motion.div>
-        </motion.div>
+          GREENTAJ
+        </motion.h1>
 
-        {/* Scroll Down Indicator */}
-        <motion.div
+        <motion.p
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ delay: 1.2 }}
-          className="absolute bottom-10 left-1/2 transform -translate-x-1/2"
+          transition={{ duration: 1, delay: 0.6 }}
+          className="text-xl sm:text-2xl md:text-3xl lg:text-4xl text-white font-semibold tracking-wide mb-8"
+          style={{ opacity: 0.95 }}
         >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ repeat: Infinity, duration: 1.5 }}
+          TRADING & CONTRACTING W.L.L
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 1, delay: 0.9 }}
+          className="flex flex-col sm:flex-row gap-4 justify-center items-center mt-8"
+        >
+          <motion.button
+            whileHover={{ scale: 1.05, y: -3 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => scrollToSection('contact')}
+            className="inline-block px-10 py-4 bg-white text-gray-800 rounded-full font-semibold text-lg transition-all shadow-[0_10px_30px_rgba(0,0,0,0.3)] hover:shadow-[0_15px_40px_rgba(0,0,0,0.4)]"
           >
-            <svg className="w-6 h-6 text-white" fill="none" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" viewBox="0 0 24 24" stroke="currentColor">
-              <path d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </motion.div>
+            Get Started
+          </motion.button>
+
+          <motion.button
+            whileHover={{ scale: 1.05, y: -3 }}
+            whileTap={{ scale: 0.95 }}
+            onClick={() => scrollToSection('about')}
+            className="inline-block px-10 py-4 border-2 border-white text-white rounded-full font-semibold text-lg transition-all hover:bg-white hover:text-gray-800"
+          >
+            Learn More
+          </motion.button>
         </motion.div>
       </div>
+
+      {/* Scroll Down Indicator */}
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2 }}
+        className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20"
+      >
+        <motion.div
+          animate={{ y: [0, 10, 0] }}
+          transition={{ repeat: Infinity, duration: 1.5 }}
+          className="flex flex-col items-center"
+        >
+          <div className="w-[30px] h-[50px] border-2 border-white rounded-full relative">
+            <motion.div
+              animate={{ y: [0, 20, 0], opacity: [0, 1, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: 'easeInOut' }}
+              className="absolute top-[10px] left-1/2 transform -translate-x-1/2 w-[6px] h-[10px] bg-white rounded-full"
+            />
+          </div>
+        </motion.div>
+      </motion.div>
     </section>
   );
 };
