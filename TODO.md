@@ -1,0 +1,3 @@
+- [x] Change Learn More button in Services section to contact-pill style
+- [x] Change View All Projects button in Gallery section to contact-pill style
+- [x] Change Learn More button in Industries section to contact-pill style
