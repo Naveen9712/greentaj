@@ -952,7 +952,7 @@ const IndustriesSection = () => {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="industries-text"
           >
-            <p className="services__eyebrow">Industries We Serve</p>
+            <p className="industries-label">Industries We Serve</p>
             <h2 className="industries-heading">
               Delivering construction expertise across Qatar's diverse sectors from commercial to government.
             </h2>

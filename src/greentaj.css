@@ -1630,6 +1630,58 @@
      0%   { transform: translateY(0); }
      100% { transform: translateY(-33.333%); }
    }
+
+   /* ============================================================
+   INDUSTRIES — FULL CENTER (1024px and below)
+   ============================================================ */
+
+@media (max-width: 1024px) {
+
+  .industries-grid {
+    grid-template-columns: 1fr;
+    gap: 70px;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .industries-text {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .industries-label {
+    justify-content: center;
+  }
+
+  .industries-heading {
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+  }
+
+  .industries-text .contact-pill {
+    align-self: center;
+  }
+
+  .industries-scroll-wrapper {
+    height: 600px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .scroll-track-wrap {
+    align-items: center;
+  }
+
+  .industry-pill {
+    text-align: center;
+    width: 80%;
+    max-width: 500px;
+  }
+
+}
    
    /* ============================================================
       14. CONTACT SECTION
