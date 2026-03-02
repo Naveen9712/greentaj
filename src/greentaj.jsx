@@ -634,17 +634,10 @@ const ProjectManagementSection = () => (
 
       <div className="work-process__grid">
         {PM_ITEMS.map((item, i) => (
-          <motion.div
-            key={i}
-            className="process-card"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{ delay: i * 0.05, duration: 0.4 }}
-          >
+          <div key={i} className="process-card">
             <div className="process-card__icon">{item.icon}</div>
             <h3 className="process-card__title">{item.label}</h3>
-          </motion.div>
+          </div>
         ))}
       </div>
     </div>
@@ -789,16 +782,9 @@ const ProjectsSection = () => (
         <h3 className="projects__clients-title">Client References</h3>
         <div className="projects__clients-grid">
           {CLIENTS.map((name, i) => (
-            <motion.div
-              key={i}
-              className="client-tag"
-              initial={{ opacity: 0 }}
-              whileInView={{ opacity: 1 }}
-              viewport={{ once: true, amount: 0.1 }}
-              transition={{ delay: i * 0.02, duration: 0.3 }}
-            >
+            <div key={i} className="client-tag">
               {name}
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
@@ -966,7 +952,7 @@ const IndustriesSection = () => {
             transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
             className="industries-text"
           >
-            <p className="industries-label">Industries We Serve</p>
+            <p className="services__eyebrow">Industries We Serve</p>
             <h2 className="industries-heading">
               Delivering construction expertise across Qatar's diverse sectors from commercial to government.
             </h2>
