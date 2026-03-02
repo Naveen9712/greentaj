@@ -1273,7 +1273,7 @@ const Footer = ({ scrollToSection }) => {
       <div className="footer__inner">
         <div className="footer__columns">
           <motion.div custom={0} variants={columnVariants} initial="hidden" animate={visible ? 'visible' : 'hidden'}>
-            <img className="footer__logo" src="https://greentaj.com/wp-content/uploads/2026/02/greentajlogo-1.png" alt="Green Taj Logo" />
+            <img className="footer__logo" src="https://offline.greentaj.com/wp-content/uploads/2026/03/greentajlogo-1.png" alt="Green Taj Logo" />
             <p className="footer__tagline">
               Building Qatar's future with precision, expertise and integrity since 2019.
             </p>
