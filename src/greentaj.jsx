@@ -232,7 +232,7 @@ const HeroSection = ({ scrollToSection }) => {
       <div
         ref={bgRef}
         className="hero__bg"
-        style={{ backgroundImage: 'url(https://greentaj.com/wp-content/uploads/2026/01/GreenTaj1-scaled.jpg)' }}
+        style={{ backgroundImage: 'url(https://offline.greentaj.com/wp-content/uploads/2026/03/GreenTaj1-scaled.jpg)' }}
       />
       <div ref={contentRef} className="hero__content">
         <motion.h1
