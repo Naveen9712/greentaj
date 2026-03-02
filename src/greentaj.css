@@ -1509,127 +1509,178 @@
    /* ============================================================
       13. INDUSTRIES SECTION — Fixed infinite loop
       ============================================================ */
-   .industries-section {
-     padding: var(--section-py) 0;
-     background: var(--gray-900);
-     overflow: hidden;
-   }
-   
-   .industries-container {
-     max-width: var(--container-max);
-     margin: 0 auto;
-     padding: 0 var(--container-px);
-   }
-   
-   .industries-grid {
-     display: grid;
-     grid-template-columns: 1fr 1fr;
-     gap: 80px;
-     align-items: center;
-   }
-   
-   .industries-text {
-     text-align: left;
-   }
-   
-   .industries-label {
-    font-family: var(--font-body);
-    font-size: 14px;
-    font-weight: 600;
-    letter-spacing: 0.16em;
-    text-transform: uppercase;
-    color: var(--green-bright);
-    margin-bottom: 16px;
+    /* ============================================================
+   INDUSTRIES SECTION — SEAMLESS LOOP VERSION
+   ============================================================ */
+
+.industries-section {
+  padding: var(--section-py) 0;
+  background: var(--gray-900);
+  overflow: hidden;
+}
+
+.industries-container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  padding: 0 var(--container-px);
+}
+
+.industries-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+  align-items: center;
+}
+
+/* LEFT SIDE */
+.industries-text {
+  text-align: left;
+}
+
+.industries-label {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--green-bright);
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.industries-heading {
+  font-family: var(--font-heading);
+  font-size: clamp(28px, 3vw, 44px);
+  font-weight: 800;
+  color: #fff;
+  margin-bottom: 36px;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+/* RIGHT SIDE SCROLL */
+.industries-scroll-wrapper {
+  position: relative;
+  height: 480px;
+  overflow: hidden;
+}
+
+/* Fade top & bottom */
+.fade-top,
+.fade-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 80px;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.fade-top {
+  top: 0;
+  background: linear-gradient(to bottom, var(--gray-900), transparent);
+}
+
+.fade-bottom {
+  bottom: 0;
+  background: linear-gradient(to top, var(--gray-900), transparent);
+}
+
+/* SCROLL TRACK */
+.scroll-track-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  animation: industries-scroll 20s linear infinite;
+  will-change: transform;
+}
+
+.scroll-track-wrap:hover {
+  animation-play-state: paused;
+}
+
+/* INDUSTRY PILL */
+.industry-pill {
+  background: var(--dark-card);
+  border: 1px solid rgba(255,255,255,0.06);
+  color: var(--gray-300);
+  padding: 14px 24px;
+  border-radius: var(--radius-full);
+  text-align: center;
+  font-family: var(--font-body);
+  font-weight: 500;
+  font-size: 15px;
+  cursor: pointer;
+  transition: all var(--t-fast);
+  white-space: nowrap;
+}
+
+.industry-pill:hover {
+  background: var(--green-dark);
+  border-color: var(--green-dark);
+  color: #fff;
+  transform: translateX(6px);
+  box-shadow: 0 4px 20px rgba(31,92,53,0.3);
+}
+
+/* SEAMLESS LOOP ANIMATION */
+@keyframes industries-scroll {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-50%);
+  }
+}
+
+/* ============================================================
+   TABLET & MOBILE (1024px and below)
+   ============================================================ */
+
+@media (max-width: 1024px) {
+
+  .industries-grid {
+    grid-template-columns: 1fr;
+    gap: 70px;
+    text-align: center;
+    justify-items: center;
+  }
+
+  .industries-text {
+    text-align: center;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 10px;
-   }
-   
-   .industries-heading {
-     font-family: var(--font-heading);
-     font-size: clamp(28px, 3vw, 44px);
-     font-weight: 800;
-     color: #fff;
-     margin-bottom: 36px;
-     line-height: 1.1;
-     letter-spacing: -0.03em;
-   }
-   
-   /* 
-     INDUSTRIES SCROLL — FIXED:
-     Uses two sets of items with animation, 
-     seamlessly looping. CSS-only solution.
-   */
-   .industries-scroll-wrapper {
-     position: relative;
-     height: 480px;
-     overflow: hidden;
-   }
-   
-   /* Fade edges */
-   .fade-top {
-     position: absolute;
-     top: 0;
-     left: 0;
-     right: 0;
-     height: 80px;
-     background: linear-gradient(to bottom, var(--gray-900), transparent);
-     pointer-events: none;
-     z-index: 10;
-   }
-   
-   .fade-bottom {
-     position: absolute;
-     bottom: 0;
-     left: 0;
-     right: 0;
-     height: 80px;
-     background: linear-gradient(to top, var(--gray-900), transparent);
-     pointer-events: none;
-     z-index: 10;
-   }
-   
-   /* Two tracks that scroll together */
-   .scroll-track-wrap {
-     display: flex;
-     flex-direction: column;
-     gap: 12px;
-     animation: industries-scroll 20s linear infinite;
-     will-change: transform;
-   }
-   
-   .scroll-track-wrap:hover {
-     animation-play-state: paused;
-   }
-   
-   .industry-pill {
-     background: var(--dark-card);
-     border: 1px solid rgba(255,255,255,0.06);
-     color: var(--gray-300);
-     padding: 14px 24px;
-     border-radius: var(--radius-full);
-     text-align: center;
-     font-family: var(--font-body);
-     font-weight: 500;
-     font-size: 15px;
-     cursor: pointer;
-     flex-shrink: 0;
-     transition: all var(--t-fast);
-     white-space: nowrap;
-   }
-   
-   .industry-pill:hover {
-     background: var(--green-dark);
-     border-color: var(--green-dark);
-     color: #fff;
-     transform: translateX(6px);
-     box-shadow: 0 4px 20px rgba(31,92,53,0.3);
-   }
-   
-   @keyframes industries-scroll {
-     0%   { transform: translateY(0); }
-     100% { transform: translateY(-33.333%); }
-   }
+  }
+
+  .industries-label {
+    justify-content: center;
+  }
+
+  .industries-heading {
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+  }
+
+  .industries-scroll-wrapper {
+    height: 600px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+
+  .scroll-track-wrap {
+    align-items: center;
+    animation: industries-scroll 5s linear infinite;
+  }
+
+  .industry-pill {
+    width: 140%;
+    max-width: 500px;
+  }
+}
    
    /* ============================================================
       14. CONTACT SECTION
