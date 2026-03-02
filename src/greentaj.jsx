@@ -924,70 +924,74 @@ const GallerySection = () => {
 /* ============================================================
    INDUSTRIES SECTION
    ============================================================ */
-const INDUSTRIES = [
-  'Commercial Buildings',
-  'Industrial Buildings',
-  'Residential Buildings',
-  'Educational Institutions',
-  'Government Organisations',
-  'Healthcare Facilities',
-  'Hospitality & Leisure',
-  'Oil & Gas Facilities',
-  'Retail & Shopping Centres',
-  'Transportation Hubs',
-  'Infrastructure Projects',
-  'Utilities & Energy Sector',
-];
-
-const IndustriesSection = () => {
-  const items = [...INDUSTRIES, ...INDUSTRIES, ...INDUSTRIES];
-  return (
-    <section className="industries-section">
-      <div className="industries-container">
-        <div className="industries-grid">
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="industries-text"
-          >
-            <p className="industries-label">Industries We Serve</p>
-            <h2 className="industries-heading">
-              Delivering construction expertise across Qatar's diverse sectors from commercial to government.
-            </h2>
-            <button
-              className="contact-pill"
-              onClick={() => document.getElementById('services').scrollIntoView({ behavior: 'smooth' })}
-            >
-              <span className="contact-pill__label">Our Services</span>
-              <span className="contact-pill__icon">
-                <span className="arrow arrow--default"><IconDiagArrow /></span>
-                <span className="arrow arrow--hover"><IconDiagArrow /></span>
-              </span>
-            </button>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.7, ease: [0.16, 1, 0.3, 1] }}
-            className="industries-scroll-wrapper"
-          >
-            <div className="scroll-track-wrap">
-              {items.map((industry, index) => (
-                <div key={`${industry}-${index}`} className="industry-pill">{industry}</div>
-              ))}
+   const INDUSTRIES = [
+    'Commercial Buildings',
+    'Industrial Buildings',
+    'Residential Buildings',
+    'Educational Institutions',
+    'Government Organisations',
+    'Healthcare Facilities',
+    'Hospitality & Leisure',
+    'Oil & Gas Facilities',
+    'Retail & Shopping Centres',
+    'Transportation Hubs',
+    'Infrastructure Projects',
+    'Utilities & Energy Sector',
+  ];
+  
+  const IndustriesSection = () => {
+  
+    // Duplicate ONLY twice for seamless loop
+    const items = [...INDUSTRIES, ...INDUSTRIES];
+  
+    return (
+      <section className="industries-section">
+        <div className="industries-container">
+          <div className="industries-grid">
+  
+            <div className="industries-text">
+              <p className="industries-label">Industries We Serve</p>
+  
+              <h2 className="industries-heading">
+                Delivering construction expertise across Qatar's diverse sectors from commercial to government.
+              </h2>
+  
+              <button
+                className="contact-pill"
+                onClick={() =>
+                  document.getElementById('services').scrollIntoView({ behavior: 'smooth' })
+                }
+              >
+                <span className="contact-pill__label">Our Services</span>
+                <span className="contact-pill__icon">
+                  <span className="arrow arrow--default">
+                    <IconDiagArrow />
+                  </span>
+                  <span className="arrow arrow--hover">
+                    <IconDiagArrow />
+                  </span>
+                </span>
+              </button>
             </div>
-            <div className="fade-top" />
-            <div className="fade-bottom" />
-          </motion.div>
+  
+            <div className="industries-scroll-wrapper">
+              <div className="scroll-track-wrap">
+                {items.map((industry, index) => (
+                  <div key={`${industry}-${index}`} className="industry-pill">
+                    {industry}
+                  </div>
+                ))}
+              </div>
+  
+              <div className="fade-top" />
+              <div className="fade-bottom" />
+            </div>
+  
+          </div>
         </div>
-      </div>
-    </section>
-  );
-};
+      </section>
+    );
+  };
 
 
 /* ============================================================
