@@ -632,15 +632,15 @@ const ProjectManagementSection = () => (
         </div>
       </div>
 
-      <div className="work-process__grid" style={{ gridTemplateColumns: 'repeat(3, 1fr)' }}>
+      <div className="work-process__grid">
         {PM_ITEMS.map((item, i) => (
           <motion.div
             key={i}
             className="process-card"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.08 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ delay: i * 0.05, duration: 0.4 }}
           >
             <div className="process-card__icon">{item.icon}</div>
             <h3 className="process-card__title">{item.label}</h3>
@@ -754,10 +754,10 @@ const ProjectsSection = () => (
           <motion.div
             key={i}
             className="project-card"
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: i * 0.07 }}
+            viewport={{ once: true, amount: 0.15 }}
+            transition={{ delay: i * 0.04, duration: 0.4 }}
           >
             <img className="project-card__img" src={project.image} alt={project.name} />
             <div className="project-card__gradient" />
@@ -794,8 +794,8 @@ const ProjectsSection = () => (
               className="client-tag"
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.04 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ delay: i * 0.02, duration: 0.3 }}
             >
               {name}
             </motion.div>
@@ -905,10 +905,10 @@ const GallerySection = () => {
             <motion.div
               key={item.id}
               className="gallery-card"
-              initial={{ opacity: 0, y: 24 }}
+              initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.06 }}
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ delay: i * 0.04, duration: 0.35 }}
             >
               <img className="gallery-card__img" src={item.image} alt={item.title} />
               <div className="gallery-card__overlay" />

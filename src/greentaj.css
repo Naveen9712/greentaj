@@ -473,19 +473,20 @@
      display: flex;
      align-items: center;
      justify-content: center;
-     gap: 20px;
+     gap: 16px;
      color: rgb(255, 255, 255);
      font-family: var(--font-body);
      font-weight: 500;
-     font-size: clamp(40px, 1.6vw, 30px);
-     letter-spacing: 0.2em;
+     font-size: clamp(11px, 2.5vw, 22px);
+     letter-spacing: 0.18em;
      text-transform: uppercase;
+     flex-wrap: wrap;
    }
    
    .hero__rule {
      flex-shrink: 0;
-     width: 50px;
-     height: 5px;
+     width: clamp(24px, 4vw, 50px);
+     height: 2px;
      background: rgb(255, 255, 255);
      border-radius: 2px;
    }
@@ -2143,75 +2144,104 @@
    
    /* ---- Large Mobile (≤ 768px) ---- */
    @media (max-width: 768px) {
-     :root { --section-py: 60px; --container-px: 20px; }
-   
-     .header { padding: 12px 16px; }
+     :root { --section-py: 56px; --container-px: 18px; }
+
+     .header { padding: 12px 14px; }
      .header__logo { font-size: 18px; }
-   
-     .hero__title { font-size: clamp(52px, 16vw, 90px); }
-     .hero__subtitle-row { font-size: 10px; letter-spacing: 0.14em; }
-     .hero__rule { width: 40px; }
-   
-     .section-title { font-size: clamp(26px, 6vw, 36px); }
-   
+
+     .hero__title { font-size: clamp(48px, 15vw, 88px); }
+     .hero__subtitle-row { gap: 12px; letter-spacing: 0.12em; }
+     .hero__rule { width: 28px; }
+
+     .section-title { font-size: clamp(24px, 6vw, 34px); }
+     .section-header { margin-bottom: 48px; }
+
      .services__tab-row { grid-template-columns: 1fr; }
-     .services__slides  { height: 280px; }
-   
+     .services__slides  { height: 260px; }
+     .services__heading { font-size: clamp(20px, 5vw, 28px); }
+
      .projects__grid { grid-template-columns: 1fr; }
      .projects__clients-grid { grid-template-columns: repeat(2, 1fr); }
-     .project-card { height: 380px; }
-   
-     .teams__grid { grid-template-columns: 1fr; }
-   
-     .work-process__grid { grid-template-columns: 1fr; }
-   
-     .gallery__grid { grid-template-columns: repeat(2, 1fr); }
-     .gallery-card { height: 220px !important; }
-   
+     .project-card { height: 360px; }
+
+     .teams__grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+     .team-card__photo-wrap { height: 260px; }
+
+     .work-process__grid { grid-template-columns: repeat(2, 1fr); }
+
+     .gallery__grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+     .gallery-card { height: 200px !important; }
+     .gallery-card__tag { font-size: 9px; padding: 3px 8px; }
+
      .contact__grid { grid-template-columns: 1fr; }
-   
-     .testimonials__stats { grid-template-columns: 1fr; gap: 20px; }
+
+     .testimonials__stats { grid-template-columns: repeat(3, 1fr); gap: 12px; }
      .testimonial-card { padding: 28px 22px; }
-   
-     .footer__columns { grid-template-columns: 1fr; gap: 32px; }
+     .testimonials__stat-num { font-size: clamp(28px, 7vw, 44px); }
+
+     .footer__columns { grid-template-columns: repeat(2, 1fr); gap: 28px; }
      .footer__bottom { flex-direction: column; align-items: flex-start; gap: 8px; }
+
+     .industries-scroll-wrapper { height: 300px; }
+
+     .contact-pill { padding: 7px 8px 7px 16px; }
+     .contact-pill__label { font-size: 13px; }
+     .contact-pill__icon { width: 30px; height: 30px; }
    }
-   
+
    /* ---- Small Mobile (≤ 480px) ---- */
    @media (max-width: 480px) {
-     :root { --section-py: 48px; --container-px: 16px; }
-   
+     :root { --section-py: 44px; --container-px: 16px; }
+
      .header { padding: 10px 12px; }
-   
-     .hero__title { font-size: clamp(44px, 18vw, 72px); }
-     .hero__subtitle-row span:not(.hero__rule) { font-size: 9px; }
-   
+
+     .hero__title { font-size: clamp(42px, 17vw, 68px); }
+
      .gallery__grid { grid-template-columns: 1fr; }
-     .gallery-card { height: 240px !important; }
-   
+     .gallery-card { height: 220px !important; }
+
      .projects__clients-grid { grid-template-columns: repeat(2, 1fr); }
-     .projects__clients { padding: 28px 20px; }
-   
+     .projects__clients { padding: 24px 16px; }
+     .projects__clients-title { font-size: 22px; margin-bottom: 24px; }
+
+     .teams__grid { grid-template-columns: 1fr; }
+     .team-card__photo-wrap { height: 300px; }
+
+     .work-process__grid { grid-template-columns: 1fr; }
+     .process-card { padding: 24px 20px; }
+
+     .testimonials__stats { grid-template-columns: 1fr; gap: 16px; }
      .testimonial-card { padding: 24px 18px; }
      .testimonial-card__quote { font-size: 14px; }
-   
-     .contact__info-card, .contact__form-card { padding: 24px 20px; }
-   
-     .about__card { padding: 20px 22px; }
+
+     .contact__info-card, .contact__form-card { padding: 22px 18px; }
+
+     .about__card { padding: 20px 20px; }
      .about__card-title { font-size: 18px; }
-   
-     .industries-scroll-wrapper { height: 260px; }
-   
+     .about__card-body { font-size: 13px; }
+
+     .industries-scroll-wrapper { height: 240px; }
+
+     .footer__columns { grid-template-columns: 1fr; }
      .footer__logo { height: 70px; }
+
+     .section-subtitle { font-size: 15px; }
+
+     .services__top-grid { gap: 28px; }
    }
-   
+
    /* ---- Extra Small (≤ 360px) ---- */
    @media (max-width: 360px) {
-     .hero__title { font-size: 40px; }
-     .hero__subtitle-row { flex-direction: column; gap: 8px; }
-     .hero__rule { display: none; }
-   
+     .hero__title { font-size: 38px; }
+     .hero__subtitle-row { gap: 8px; font-size: 10px; }
+     .hero__rule { width: 18px; }
+
      .services__nav-btn { width: 38px; height: 38px; }
-   
-     .section-title { font-size: 24px; }
+
+     .section-title { font-size: 22px; }
+
+     .process-card { padding: 20px 16px; }
+     .process-card__title { font-size: 17px; }
+
+     .contact__info-card, .contact__form-card { padding: 18px 14px; }
    }
