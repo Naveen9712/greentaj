@@ -1287,7 +1287,7 @@ const Footer = ({ scrollToSection }) => {
           </motion.div>
 
           <motion.div custom={1} variants={columnVariants} initial="hidden" animate={visible ? 'visible' : 'hidden'}>
-            <h3 className="footer__col-title">Quick Links</h3>
+            <h3 className="footer__col-title">Quicker Links</h3>
             <ul className="footer__list">
               {FOOTER_QUICK_LINKS.map(link => (
                 <li key={link} className="footer__list-item">
